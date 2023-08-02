@@ -1,2 +1,2 @@
 # pyHueBridge
-A Python FastAPI based server to facilitate easier comminucation with a Hue Bridge
+A Python FastAPI based server to facilitate easier communication with a Hue Bridge
