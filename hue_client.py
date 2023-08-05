@@ -22,7 +22,7 @@ def groups():
     groups = groups_request.json()
     
     for k, v in lights.items():
-        lights[k] = {'id': k, 'name': v['name'], 'state': v['state']['on']}
+        lights[k] = {'id': k, 'name': v['name'], 'on': v['state']['on'], 'bri': v['state']['bri'],'sat': v['state']['sat'], 'hue': v['state']['hue']}
         
     groups = dict(filter(is_group_a_room, groups.items()))
 
