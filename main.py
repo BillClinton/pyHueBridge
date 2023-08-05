@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from models import Light
 import uvicorn
 import hue_client

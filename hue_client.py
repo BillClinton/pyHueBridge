@@ -1,6 +1,5 @@
 import requests
 from config import settings
-from pydantic import BaseModel
 from models import Light
 
 
