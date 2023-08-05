@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+from models import Light
 import uvicorn
 import hue_client
 
@@ -8,6 +10,10 @@ app = FastAPI()
 @app.get("/")
 async def root():  
     return hue_client.groups()
+
+@app.post("/light")
+def update(light: Light):
+    return hue_client.set(light)
 
 
 if __name__ == "__main__":
