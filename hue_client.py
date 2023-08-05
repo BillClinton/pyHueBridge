@@ -1,5 +1,8 @@
 import requests
 from config import settings
+from pydantic import BaseModel
+from models import Light
+
 
 def groups():   
     url = f"{settings.hub_url}/api/{settings.username}"
@@ -32,3 +35,10 @@ def groups():
         groups[k] = {'id': k, 'name': v['name'], 'lights': room_lights}        
        
     return groups        
+
+def set(light: Light):
+    payload = light.model_dump(exclude_unset=True)
+
+    url = f"{settings.hub_url}/api/{settings.username}/lights/{light.id}/state"
+    
+    return  requests.put(url, json=payload).json();
