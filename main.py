@@ -6,8 +6,7 @@ import hue_client
 
 app = FastAPI()
 
-
-@app.get("/")
+@app.get("/lights")
 async def root():  
     return hue_client.groups()
 
