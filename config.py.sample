@@ -1,0 +1,9 @@
+# Set your hue bridge IP and username (application key) here
+from pydantic_settings import BaseSettings
+    
+
+class Settings(BaseSettings):
+    hub_url: str = 'http://127.0.0.1'
+    username: str = '<your username here>' 
+
+settings = Settings()
