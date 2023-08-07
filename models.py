@@ -6,3 +6,5 @@ class Light(BaseModel):
     bri: int = None
     hue: int = None
     sat: int = None
+    color: str = None
+    xy: list = None
