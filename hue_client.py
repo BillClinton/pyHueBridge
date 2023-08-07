@@ -1,7 +1,7 @@
 import requests
 from config import settings
 from models import Light
-
+from hue_color import rgb_to_hue_xy, hue_xy_to_rgb
 
 def groups():   
     url = f"{settings.hub_url}/api/{settings.username}"
@@ -19,7 +19,9 @@ def groups():
     groups = groups_request.json()
     
     for k, v in lights.items():
-        lights[k] = {'id': k, 'name': v['name'], 'on': v['state']['on'], 'bri': v['state']['bri'],'sat': v['state']['sat'], 'hue': v['state']['hue']}
+        state = v['state']
+        color = hue_xy_to_rgb(state['xy'][0], state['xy'][1], state['bri'] )
+        lights[k] = {'id': k, 'name': v['name'], 'on': v['state']['on'], 'color': color}
         
     groups = dict(filter(is_group_a_room, groups.items()))
 
@@ -34,7 +36,14 @@ def groups():
 
 def set(light: Light):
     payload = light.model_dump(exclude_unset=True)
-
+    del payload['id']
+    
+    if (light.color is not None):
+        color = rgb_to_hue_xy(light.color)
+        payload['xy'] = color['xy']
+        payload['bri'] = color['brightness']
+        del payload['color']
+        
     url = f"{settings.hub_url}/api/{settings.username}/lights/{light.id}/state"
     
     return  requests.put(url, json=payload).json();
