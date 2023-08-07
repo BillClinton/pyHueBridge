@@ -7,8 +7,6 @@ def groups():
     url = f"{settings.hub_url}/api/{settings.username}"
 
     def is_group_a_room(group):
-        print(group[1]['type'])
-        print(type(group))
         if group[1]['type'] == 'Room':
             return True
         else:
@@ -28,7 +26,6 @@ def groups():
     for k, v in groups.items():
         room_lights = []
         for l in v['lights']:
-            print(lights[l], type(lights[l]))
             room_lights.append(lights[l])
 
         groups[k] = {'id': k, 'name': v['name'], 'lights': room_lights}        
