@@ -9,6 +9,8 @@ It accomplishes the following:
  - translates colors to RGB values rather than HSV 
 
 ## Configuration
+Note: Requires the Philips Hue bridge/hub
+
 Create a `config.py` file in the server's root directory following the example of the `config.py.sample` file.
 
 ## Development
