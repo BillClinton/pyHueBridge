@@ -16,8 +16,9 @@ app.add_middleware(
 
 
 @app.get("/lights")
-async def root():  
+async def root():
     return hue_client.groups()
+
 
 @app.post("/light")
 def update(light: Light):
